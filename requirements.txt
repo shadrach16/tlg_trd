@@ -1,0 +1,2 @@
+pocketoptionapi2==0.1.1
+Telethon==1.40.0
