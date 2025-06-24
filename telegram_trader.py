@@ -211,7 +211,7 @@ def parse_trade_message(message_text):
         signal['expiration_minutes'] = int(exp_match.group(1))
     else:
         logger.warning("Could not parse Expiration from message. Defaulting to 5 minutes.")
-        signal['expiration_minutes'] = 1 # Fallback to a default if not found
+        signal['expiration_minutes'] = 5 # Fallback to a default if not found
         # return None # Or return None if expiration is strictly required
 
     # Regex to extract Entry Action (SELL/BUY) (handling bold and emoji)
@@ -416,8 +416,8 @@ async def main():
 
                     except Exception as e:
                         logger.critical(f"An error occurred during trade execution: {e}", exc_info=True)
-                    finally:
-                        await po_client.disconnect() # Ensure PocketOption client is disconnected
+                    # finally:
+                    #     await po_client.disconnect() # Ensure PocketOption client is disconnected
 
                 else:
                     logger.info("  Content: Non-text message (e.g., photo, sticker, voice message).")
